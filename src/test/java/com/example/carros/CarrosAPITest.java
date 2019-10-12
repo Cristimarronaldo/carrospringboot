@@ -26,19 +26,20 @@ public class CarrosAPITest {
     @Autowired
     private CarroService service;
 
-    private ResponseEntity<CarroDTO> getCarro(String url){
-        return rest.withBasicAuth("user", "123").getForEntity(url, CarroDTO.class);
+    private ResponseEntity<CarroDTO> getCarro(String url) {
+        return
+                rest.withBasicAuth("user","123").getForEntity(url, CarroDTO.class);
     }
 
-    private ResponseEntity<List<CarroDTO>> getCarros(String url){
-        return rest.exchange(
+    private ResponseEntity<List<CarroDTO>> getCarros(String url) {
+        return rest.withBasicAuth("user","123").exchange(
                 url,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<CarroDTO>>() {
-                }
-        );
+                });
     }
+
 
     @Test
     public void testSave() {
@@ -102,5 +103,4 @@ public class CarrosAPITest {
         ResponseEntity response = getCarro("/api/v1/carros/1100");
         assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
     }
-
 }
