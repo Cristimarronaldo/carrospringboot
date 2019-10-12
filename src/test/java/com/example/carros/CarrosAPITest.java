@@ -23,6 +23,9 @@ public class CarrosAPITest {
     @Autowired
     protected TestRestTemplate rest;
 
+    @Autowired
+    private CarroService service;
+
     private ResponseEntity<CarroDTO> getCarro(String url){
         return rest.withBasicAuth("user", "123").getForEntity(url, CarroDTO.class);
     }
